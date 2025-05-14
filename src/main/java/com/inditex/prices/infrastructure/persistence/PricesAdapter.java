@@ -18,35 +18,7 @@ public class PricesAdapter implements PricesPort {
     private final PricesPersistenceMapper mapper;
 
     @Override
-    public Prices getPromotionById(Integer id) {
-        Optional<PricesEntity> promotionEntity = repository.findById(id);
-        return mapper.toDomain(promotionEntity.orElseThrow());
-    }
-
-    @Override
-    public List<Prices> getAllPrices() {
-        List<PricesEntity> pricesEntityList = (List<PricesEntity>) repository.findAll();
-        return mapper.toDomainList(pricesEntityList);
-    }
-
-    @Override
-    public Prices createPrices(Prices prices) {
-        PricesEntity pricesEntity = repository.save(mapper.toEntity(prices));
-        return mapper.toDomain(pricesEntity);
-    }
-
-    @Override
-    public Prices updatePromotion(Integer id, Prices prices) {
-         return mapper.toDomain(repository.save(mapper.toEntity(prices)));
-    }
-
-    @Override
     public List<Prices> getValidPricesByProductIdAndBrandId(LocalDateTime date, Integer productId, Integer brandId) {
         return mapper.toDomainList(repository.getValidPricesByProductIdAndBrandId(date, productId, brandId));
-    }
-
-    @Override
-    public void deletePricesById(Integer id) {
-        repository.deleteById(id);
     }
 }

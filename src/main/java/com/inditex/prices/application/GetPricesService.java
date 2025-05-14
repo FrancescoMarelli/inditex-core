@@ -16,22 +16,13 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class GetPricesService implements GetPricesUseCase {
     private final PricesPort port;
-    @Override
-    public Prices getPriceById(UUID id) {
-        return null;
-    }
-
-    @Override
-    public List<Prices> getAllPrices() {
-        return null;
-    }
 
     @Override
     public Prices getValidPricesByProductIdAndBrandId(LocalDateTime date, Integer productId, Integer brandId) {
         List<Prices> pricesList = port.getValidPricesByProductIdAndBrandId(date, productId, brandId);
 
         return pricesList.stream()
-            .min(Comparator.comparingInt(Prices::getPriority))
+            .max(Comparator.comparingInt(Prices::getPriority))
             .orElseThrow(() -> new PriceNotFoundException("No se encontró una tarifa válida para esa fecha."));
     }
 

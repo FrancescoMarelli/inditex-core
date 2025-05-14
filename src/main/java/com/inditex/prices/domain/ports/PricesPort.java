@@ -6,15 +6,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PricesPort {
-    Prices getPromotionById(Integer id);
-    List<Prices> getAllPrices();
-
-    Prices createPrices(Prices prices);
-
-    Prices updatePromotion(Integer id, Prices prices);
-
-
     List<Prices> getValidPricesByProductIdAndBrandId(LocalDateTime date, Integer productId, Integer brandId);
 
-    void deletePricesById(Integer id);
 }
