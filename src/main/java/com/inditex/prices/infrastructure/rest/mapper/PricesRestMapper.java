@@ -8,10 +8,9 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PricesRestMapper {
+
     PricesDto toDto(Prices prices);
+
     Prices toDomain(PricesDto pricesDto);
 
-    List<Prices> toDomainList(List<PricesDto> pricesDtoList);
-
-    List<PricesDto> toDtoList(List<Prices> pricesList);
 }

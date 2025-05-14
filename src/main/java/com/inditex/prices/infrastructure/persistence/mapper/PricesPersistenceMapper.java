@@ -9,13 +9,12 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface PricesPersistenceMapper {
+
     @Mapping(target = "curr", source = "currencyCode")
     PricesEntity toEntity(Prices prices);
+
     @Mapping(target = "currencyCode", source = "curr")
     Prices toDomain(PricesEntity entity);
-
-    List<PricesEntity> toEntityList(List<Prices> pricesList);
-
 
     List<Prices> toDomainList(List<PricesEntity> promotionEntities);
 
