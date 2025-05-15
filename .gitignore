@@ -8,10 +8,18 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/encodings.xml
+.idea/git_toolbox_blame.xml
+.idea/git_toolbox_prj.xml
+.idea/misc.xml
+.idea/uiDesigner.xml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/.gitignore
 *.iws
 *.iml
 *.ipr
-
+*.db
 ### Eclipse ###
 .apt_generated
 .classpath
@@ -37,14 +45,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-/.idea
-compiler.xml
-encodings.xml
-git_toolbox_blame.xml
-git_toolbox_prj.xml
-jarRepositories.xml
-misc.xml
-uiDesigner.xml
-vcs.xml
-workspace.xml
 .gitignore

@@ -21,7 +21,6 @@ import java.util.Currency;
 @Table(name="prices")
 public class PricesEntity {
     @Id
-    @GeneratedValue
     @Column(name="id")
     private Integer id;
 
