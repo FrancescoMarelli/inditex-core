@@ -34,6 +34,11 @@ public class RestControllerExceptionHandler {
         return buildResponse("Error interno del servidor", HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @ExceptionHandler(InvalidCurrencyCodeException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidCurrency(InvalidCurrencyCodeException ex) {
+        return buildResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
     private ResponseEntity<ErrorResponse> buildResponse(String message, HttpStatus status) {
         ErrorResponse error = new ErrorResponse(
             message,
@@ -42,4 +47,5 @@ public class RestControllerExceptionHandler {
         );
         return ResponseEntity.status(status).body(error);
     }
+
 }

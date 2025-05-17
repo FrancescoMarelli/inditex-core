@@ -4,6 +4,7 @@ import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
 import com.inditex.prices.infrastructure.rest.dto.PricesDto;
+import com.inditex.prices.infrastructure.rest.exceptions.InvalidCurrencyCodeException;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 class PricesControllerTest {
@@ -87,4 +90,21 @@ class PricesControllerTest {
         verify(getPricesUseCase).getValidPricesByProductIdAndBrandId(date, productId, brandId);
         verify(mapper).toDto(domain);
     }
+    @Test
+    void shouldThrowExceptionForInvalidCurrencyCode() {
+        // Given
+        dto.setCurrencyCode("XYZ");
+
+        // When And Then
+        InvalidCurrencyCodeException exception = assertThrows(
+            InvalidCurrencyCodeException.class,
+            () -> controller.createPrices(dto)
+        );
+
+        assertEquals("Código de moneda inválido: XYZ", exception.getMessage());
+
+        verifyNoInteractions(mapper, createPricesUseCase);
+    }
+
+
 }

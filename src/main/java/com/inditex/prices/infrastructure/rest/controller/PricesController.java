@@ -3,6 +3,7 @@ package com.inditex.prices.infrastructure.rest.controller;
 import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
+import com.inditex.prices.infrastructure.rest.exceptions.InvalidCurrencyCodeException;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +18,7 @@ import com.inditex.prices.infrastructure.rest.dto.PricesDto;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -28,6 +30,7 @@ public class PricesController {
 
     @PostMapping("/create-prices")
     public ResponseEntity<PricesDto> createPrices(@RequestBody PricesDto dto) {
+        validateCurrencyCode(dto.getCurrencyCode());
         Prices prices = createPromotionService.createPrice(pricesRestMapper.toDomain(dto));
         return ResponseEntity.ok(pricesRestMapper.toDto(prices));
     }
@@ -42,6 +45,14 @@ public class PricesController {
         Prices prices = getPricesUseCase
             .getValidPricesByProductIdAndBrandId(date, productId, brandId);
         return ResponseEntity.ok(pricesRestMapper.toDto(prices));
+    }
+
+    private void validateCurrencyCode(String code) {
+        try {
+            Currency.getInstance(code);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidCurrencyCodeException("Código de moneda inválido: " + code);
+        }
     }
 
 }
