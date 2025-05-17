@@ -16,7 +16,7 @@ Para lanzar la aplicación desde tu IDE (Botón run) o desde la terminal ejecuta
 
 ## Realizar consultas
 
-Acceder a la interfaz Swagger UI está disponible en: http://localhost:8082/swagger-ui.html
+Para acceder a la interfaz Swagger UI, introduce en el browser la siguiente ruta: http://localhost:8082/swagger-ui.html
 
 ### Obten información de una promoción por fecha
 Se puede acceder al endpoint de consulta de precios por rango de fechas: `/api/v1/get-prices-info`, ahí introduce los datos de consulta: fecha, id de marca e id del producto en los formatos sugeridos en la interfaz
