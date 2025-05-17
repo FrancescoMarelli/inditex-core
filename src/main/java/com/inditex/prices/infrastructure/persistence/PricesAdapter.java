@@ -18,6 +18,11 @@ public class PricesAdapter implements PricesPort {
     private final PricesPersistenceMapper mapper;
 
     @Override
+    public Prices createPrices(Prices prices) {
+        return mapper.toDomain(repository.save(mapper.toEntity(prices)));
+    }
+
+    @Override
     public List<Prices> getValidPricesByProductIdAndBrandId(LocalDateTime date, Integer productId, Integer brandId) {
         return mapper.toDomainList(repository.getValidPricesByProductIdAndBrandId(date, productId, brandId));
     }
