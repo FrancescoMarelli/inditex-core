@@ -19,7 +19,8 @@ public class PricesAdapter implements PricesPort {
 
     @Override
     public Prices createPrices(Prices prices) {
-        return mapper.toDomain(repository.save(mapper.toEntity(prices)));
+        PricesEntity entity = mapper.toEntity(prices);
+        return mapper.toDomain(repository.save(entity));
     }
 
     @Override

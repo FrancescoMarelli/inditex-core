@@ -1,5 +1,7 @@
-package com.inditex.prices.infrastructure.rest;
+package com.inditex.prices.infrastructure.rest.exceptions;
 
+import com.inditex.prices.infrastructure.rest.exceptions.ErrorResponse;
+import com.inditex.prices.infrastructure.rest.exceptions.PriceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

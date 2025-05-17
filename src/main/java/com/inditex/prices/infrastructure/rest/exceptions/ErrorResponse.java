@@ -1,4 +1,4 @@
-package com.inditex.prices.infrastructure.rest;
+package com.inditex.prices.infrastructure.rest.exceptions;
 
 public record ErrorResponse(
     String message,

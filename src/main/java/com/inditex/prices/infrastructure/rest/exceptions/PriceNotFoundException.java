@@ -1,4 +1,4 @@
-package com.inditex.prices.infrastructure.rest;
+package com.inditex.prices.infrastructure.rest.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

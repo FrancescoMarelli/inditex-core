@@ -3,14 +3,13 @@ package com.inditex.prices.application;
 import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
 import com.inditex.prices.domain.ports.PricesPort;
-import com.inditex.prices.infrastructure.rest.PriceNotFoundException;
+import com.inditex.prices.infrastructure.rest.exceptions.PriceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

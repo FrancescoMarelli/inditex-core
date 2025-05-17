@@ -19,7 +19,7 @@ Para lanzar la aplicación desde tu IDE (Botón run) o desde la terminal ejecuta
 Se puede acceder al endpoint de consulta de precios por rango de fechas: `/api/v1/get-prices-info`, ahí introduce los datos de consulta: fecha, id de marca e id del producto
 
 ## Crear promociones personalizadas
-Se ha habilitado un endpoint adicional para registrar nuevas promociones, lo que permite añadir marcas, rangos de fechas y precios específicos.
+Se ha habilitado un endpoint adicional para registrar nuevas promociones, lo que permite añadir marcas, rangos de fechas y precios específicos: `/api/v1/create-prices`
 
 ##  Base de Datos H2
 Durante la inicialización de la aplicación:
