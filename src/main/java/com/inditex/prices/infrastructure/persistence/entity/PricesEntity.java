@@ -37,7 +37,7 @@ public class PricesEntity {
     private Integer priceList;
 
     @Column(name="product_id")
-    private Integer productId;
+    private String productId;
 
     @Column(name="priority")
     private Integer priority;

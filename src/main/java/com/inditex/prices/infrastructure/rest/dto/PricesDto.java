@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class PricesDto {
     private Integer brandId;
+    private String productId;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Integer priceList;

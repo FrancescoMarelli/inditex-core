@@ -1,8 +1,3 @@
-## Checklist
-- porque si no es en disco h2 console no mira la misma bbdd
-- hacer test de servicio
-
-
 # Inditex Prices API
 
 ## 🛠 Instrucciones de Uso
