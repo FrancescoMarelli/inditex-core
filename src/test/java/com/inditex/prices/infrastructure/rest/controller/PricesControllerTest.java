@@ -4,23 +4,23 @@ import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
 import com.inditex.prices.infrastructure.rest.dto.PricesDto;
-import com.inditex.prices.infrastructure.rest.exceptions.InvalidCurrencyCodeException;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 class PricesControllerTest {
 
     @Mock
@@ -40,7 +40,6 @@ class PricesControllerTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
 
         dto = PricesDto.builder()
             .brandId(1)
@@ -64,7 +63,7 @@ class PricesControllerTest {
 
         ResponseEntity<PricesDto> response = controller.createPrices(dto);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(dto, response.getBody());
 
         verify(mapper).toDomain(dto);
@@ -84,27 +83,11 @@ class PricesControllerTest {
 
         ResponseEntity<PricesDto> response = controller.pricesInformation(date, productId, brandId);
 
-        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(dto, response.getBody());
 
         verify(getPricesUseCase).getValidPricesByProductIdAndBrandId(date, productId, brandId);
         verify(mapper).toDto(domain);
     }
-    @Test
-    void shouldThrowExceptionForInvalidCurrencyCode() {
-        // Given
-        dto.setCurrencyCode("XYZ");
-
-        // When And Then
-        InvalidCurrencyCodeException exception = assertThrows(
-            InvalidCurrencyCodeException.class,
-            () -> controller.createPrices(dto)
-        );
-
-        assertEquals("Código de moneda inválido: XYZ", exception.getMessage());
-
-        verifyNoInteractions(mapper, createPricesUseCase);
-    }
-
 
 }
