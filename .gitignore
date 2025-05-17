@@ -46,4 +46,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-.gitignore
+*mv.db
