@@ -3,7 +3,9 @@ package com.inditex.prices.infrastructure.rest.controller;
 import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
+import com.inditex.prices.infrastructure.rest.dto.PricesDto;
 import com.inditex.prices.infrastructure.rest.exceptions.InvalidCurrencyCodeException;
+import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.inditex.prices.infrastructure.rest.dto.PricesDto;
-import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 
 import java.time.LocalDateTime;
 import java.util.Currency;

@@ -4,8 +4,6 @@ import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.infrastructure.rest.dto.PricesDto;
 import org.mapstruct.Mapper;
 
-import java.util.List;
-
 @Mapper(componentModel = "spring")
 public interface PricesRestMapper {
 
