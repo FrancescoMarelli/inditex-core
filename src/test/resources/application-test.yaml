@@ -5,13 +5,13 @@ spring:
     username: user
     password: password
   jpa:
-    ddl-auto: create-drop
+    ddl-auto: never
   sql:
     init:
       mode: never
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
   h2:
     console:
       enabled: true
-
-
 
