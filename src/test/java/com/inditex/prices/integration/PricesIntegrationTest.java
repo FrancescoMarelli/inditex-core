@@ -20,7 +20,7 @@ public class PricesIntegrationTest {
     private MockMvc mockMvc;
 
     @Test
-    @DisplayName("Caso 1: Petición a las 10:00 del día 14 debería devolver primera fila")
+    @DisplayName("Caso 1: Petición a las 10:00 del día 14 debería devolver la tarifa 1")
     void shouldReturnValidPrice() throws Exception {
         mockMvc.perform(get(GET_PRICES_INFO_ENDPOINT)
                 .param("date", "2020-06-14T10:00:00")
@@ -31,7 +31,7 @@ public class PricesIntegrationTest {
     }
 
     @Test
-    @DisplayName("Caso 2: Petición a las 16:00 del día 14 debería devolver la fila dos")
+    @DisplayName("Caso 2: Petición a las 16:00 del día 14 debería devolver la tarifa 2")
     void shouldReturnValidPrice2() throws Exception {
         mockMvc.perform(get(GET_PRICES_INFO_ENDPOINT)
                 .param("date", "2020-06-14T16:00:00")
@@ -42,7 +42,7 @@ public class PricesIntegrationTest {
     }
 
     @Test
-    @DisplayName("Caso 3: Petición a las 21:00 del día 14 debería devolver la fila uno")
+    @DisplayName("Caso 3: Petición a las 21:00 del día 14 debería devolver la tarifa 1")
     void shouldReturnValidPrice3() throws Exception {
         mockMvc.perform(get(GET_PRICES_INFO_ENDPOINT)
                 .param("date", "2020-06-14T21:00:00")
@@ -53,7 +53,7 @@ public class PricesIntegrationTest {
     }
 
     @Test
-    @DisplayName("Caso 4: Petición a las 10:00 del día 15 debería devolver la fila tres")
+    @DisplayName("Caso 4: Petición a las 10:00 del día 15 debería devolver la tarifa 3")
     void shouldReturnValidPrice4() throws Exception {
         mockMvc.perform(get(GET_PRICES_INFO_ENDPOINT)
                 .param("date", "2020-06-15T10:00:00")
@@ -64,7 +64,7 @@ public class PricesIntegrationTest {
     }
 
     @Test
-    @DisplayName("Caso 5: Petición a las 21:00 del día 16 debería devolver la fila cuatro")
+    @DisplayName("Caso 5: Petición a las 21:00 del día 16 debería devolver la tarifa 4")
     void shouldReturnValidPrice5() throws Exception {
         mockMvc.perform(get(GET_PRICES_INFO_ENDPOINT)
                 .param("date", "2020-06-16T21:00:00")
