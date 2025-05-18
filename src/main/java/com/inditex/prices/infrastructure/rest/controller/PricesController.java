@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping
 @RequiredArgsConstructor
-public class PricesController implements PricesControllerV1 {
+public class PricesController implements com.inditex.prices.infrastructure.rest.controller.PricesControllerApi {
     private final CreatePricesUseCase createPromotionService;
     private final GetPricesUseCase getPricesUseCase;
     private final PricesRestMapper pricesRestMapper;
 
+    @Override
     public ResponseEntity<PricesDto> createPrices(@RequestBody PricesDto dto) {
         Prices prices = createPromotionService.createPrice(pricesRestMapper.toDomain(dto));
         PricesDto response = pricesRestMapper.toDto(prices);
@@ -29,6 +30,7 @@ public class PricesController implements PricesControllerV1 {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @Override
     public ResponseEntity<PricesDto> pricesInformation(@Valid PricesQueryDto dto) {
         Prices prices = getPricesUseCase
             .getValidPricesByProductIdAndBrandId(dto.getDate(), dto.getProductId(), dto.getBrandId());
