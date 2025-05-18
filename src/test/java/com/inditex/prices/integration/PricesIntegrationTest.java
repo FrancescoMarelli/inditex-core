@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.LocalDateTime;
@@ -19,15 +20,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class PricesIntegrationTest {
     private final String GET_PRICES_INFO_ENDPOINT = "/api/v1/get-prices-info";
     private final String POST_PRICES = "/api/v1/create-prices";
 
     @Autowired
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+   @Autowired
+   ObjectMapper objectMapper;
+
 
     @Test
     @DisplayName("Caso 1: Petición a las 10:00 del día 14 debería devolver la tarifa 1")
