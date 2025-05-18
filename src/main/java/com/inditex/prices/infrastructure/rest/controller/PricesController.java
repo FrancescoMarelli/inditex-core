@@ -4,43 +4,31 @@ import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
 import com.inditex.prices.infrastructure.rest.dto.PricesDto;
+import com.inditex.prices.infrastructure.rest.dto.PricesQueryDto;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
-import io.swagger.v3.oas.annotations.Parameter;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
-public class PricesController {
+public class PricesController implements PricesControllerV1 {
     private final CreatePricesUseCase createPromotionService;
     private final GetPricesUseCase getPricesUseCase;
     private final PricesRestMapper pricesRestMapper;
 
-    @PostMapping("/create-prices")
     public ResponseEntity<PricesDto> createPrices(@RequestBody PricesDto dto) {
         Prices prices = createPromotionService.createPrice(pricesRestMapper.toDomain(dto));
         return ResponseEntity.ok(pricesRestMapper.toDto(prices));
     }
 
-    @GetMapping("/get-prices-info")
-    public ResponseEntity<PricesDto> pricesInformation(
-        @Parameter(description = "Fecha en formato yyyy-MM-ddTHH:mm:ss.SSS")
-        @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime  date,
-        @RequestParam Integer productId,
-        @RequestParam Integer brandId) {
-
+    public ResponseEntity<PricesDto> pricesInformation(@Valid PricesQueryDto dto) {
         Prices prices = getPricesUseCase
-            .getValidPricesByProductIdAndBrandId(date, productId, brandId);
+            .getValidPricesByProductIdAndBrandId(dto.getDate(), dto.getProductId(), dto.getBrandId());
         return ResponseEntity.ok(pricesRestMapper.toDto(prices));
     }
 

@@ -13,20 +13,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class PricesDto {
-    @Schema(example = "1")
+    @Schema(description = "Identificador único para la marca a la que pertenece el producto", example = "1")
     private Integer brandId;
-    @Schema(example = "1")
+
+    @Schema(description = "Identificador único para cada producto", example = "1")
     private String productId;
-    @Schema(example = "2025-05-14T10:00:00")
+
+    @Schema(description = "Indica la fecha de inicio del precio y tarifa", example = "2025-05-14T10:00:00")
     private LocalDateTime startDate;
-    @Schema(example = "2025-05-18T10:00:00")
+
+    @Schema(description = "Indica la fecha de fin del precio y tarifa", example = "2025-05-18T10:00:00")
     private LocalDateTime endDate;
-    @Schema(example = "1")
+
+    @Schema(description = "Identificador de una tarifa aplicada a un producto", example = "1")
     private Integer priceList;
-    @Schema(example = "1")
+
+    @Schema(description = "Valor que indica que la tarifa con la prioridad más alta es la que aplica", example = "1")
     private Integer priority;
-    @Schema(example = "23.3")
+
+    @Schema(description = " Indica el precio final de venta del producto", example = "23.3")
     private Double price;
-    @Schema(example = "EUR")
+
+    @Schema(description = "Codigo ISO de la moneda en la que se establece el precio", example = "EUR")
     private String currencyCode;
 }

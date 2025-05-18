@@ -4,6 +4,7 @@ import com.inditex.prices.domain.model.Prices;
 import com.inditex.prices.domain.ports.CreatePricesUseCase;
 import com.inditex.prices.domain.ports.GetPricesUseCase;
 import com.inditex.prices.infrastructure.rest.dto.PricesDto;
+import com.inditex.prices.infrastructure.rest.dto.PricesQueryDto;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -73,20 +74,18 @@ class PricesControllerTest {
 
     @Test
     void shouldGetPricesInfo() {
-        LocalDateTime date = LocalDateTime.now();
-        Integer productId = 123;
-        Integer brandId = 1;
+        PricesQueryDto queryDto = PricesQueryDto.builder().date(LocalDateTime.now()).brandId(1).productId(123).build();
 
-        when(getPricesUseCase.getValidPricesByProductIdAndBrandId(date, productId, brandId))
+        when(getPricesUseCase.getValidPricesByProductIdAndBrandId(queryDto.getDate(), queryDto.getProductId(), queryDto.getBrandId()))
             .thenReturn(domain);
         when(mapper.toDto(domain)).thenReturn(dto);
 
-        ResponseEntity<PricesDto> response = controller.pricesInformation(date, productId, brandId);
+        ResponseEntity<PricesDto> response = controller.pricesInformation(queryDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(dto, response.getBody());
 
-        verify(getPricesUseCase).getValidPricesByProductIdAndBrandId(date, productId, brandId);
+        verify(getPricesUseCase).getValidPricesByProductIdAndBrandId(queryDto.getDate(), queryDto.getProductId(), queryDto.getBrandId());
         verify(mapper).toDto(domain);
     }
 
