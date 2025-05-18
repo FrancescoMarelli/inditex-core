@@ -17,7 +17,7 @@ public interface PricesControllerV1 {
         description = "Registra una nueva promoción para un producto en un rango de fechas determinado."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Promoción creada exitosamente"),
+        @ApiResponse(responseCode = "201", description = "Promoción creada exitosamente"),
         @ApiResponse(responseCode = "400", description = "Solicitud inválida"),
         @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
