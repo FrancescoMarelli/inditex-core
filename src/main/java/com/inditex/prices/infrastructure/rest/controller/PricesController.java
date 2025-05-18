@@ -8,6 +8,7 @@ import com.inditex.prices.infrastructure.rest.dto.PricesQueryDto;
 import com.inditex.prices.infrastructure.rest.mapper.PricesRestMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +24,9 @@ public class PricesController implements PricesControllerV1 {
 
     public ResponseEntity<PricesDto> createPrices(@RequestBody PricesDto dto) {
         Prices prices = createPromotionService.createPrice(pricesRestMapper.toDomain(dto));
-        return ResponseEntity.ok(pricesRestMapper.toDto(prices));
+        PricesDto response = pricesRestMapper.toDto(prices);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     public ResponseEntity<PricesDto> pricesInformation(@Valid PricesQueryDto dto) {

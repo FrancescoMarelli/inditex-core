@@ -64,7 +64,7 @@ class PricesControllerTest {
 
         ResponseEntity<PricesDto> response = controller.createPrices(dto);
 
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
         assertEquals(dto, response.getBody());
 
         verify(mapper).toDomain(dto);
