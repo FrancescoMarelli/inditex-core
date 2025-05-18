@@ -2,17 +2,14 @@ openapi: 3.0.3
 info:
   title: Prices API
   version: v1
-tags:
-  - name: pricesApi
 servers:
   - url: http://localhost:8082
     description: Generated server url
-
 paths:
   /api/v1/create-prices:
     post:
       tags:
-        - prices-controller
+        - pricesV1
       summary: Crear una promoción de precios
       description: Registra una nueva promoción para un producto en un rango de fechas determinado.
       operationId: createPrices
@@ -45,7 +42,7 @@ paths:
   /api/v1/get-prices-info:
     get:
       tags:
-        - prices-controller
+        - pricesV1
       summary: Obtener precio aplicable
       description: Devuelve la información de precio vigente para un producto, marca y fecha proporcionados.
       operationId: pricesInformation

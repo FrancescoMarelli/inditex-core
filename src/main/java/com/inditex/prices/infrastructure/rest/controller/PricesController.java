@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping
 @RequiredArgsConstructor
-public class PricesController implements com.inditex.prices.infrastructure.rest.controller.PricesControllerApi {
+public class PricesController implements PricesV1Api {
     private final CreatePricesUseCase createPromotionService;
     private final GetPricesUseCase getPricesUseCase;
     private final PricesRestMapper pricesRestMapper;
